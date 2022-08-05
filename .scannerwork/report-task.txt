@@ -2,5 +2,5 @@ projectKey=laravel_memcache
 serverUrl=https://quality.growexx.com
 serverVersion=8.9.6.50800
 dashboardUrl=https://quality.growexx.com/dashboard?id=laravel_memcache
-ceTaskId=AYJkG5egMIhmpMOOX1Ei
-ceTaskUrl=https://quality.growexx.com/api/ce/task?id=AYJkG5egMIhmpMOOX1Ei
+ceTaskId=AYJtnMM410q5PrTf1KnH
+ceTaskUrl=https://quality.growexx.com/api/ce/task?id=AYJtnMM410q5PrTf1KnH

@@ -9,19 +9,13 @@ use App\Models\User;
 
 class UserControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-   
-
-    public function test_get_all_memcache()
+    public function test_get_all_roles()
     {
         $response = $this->withoutMiddleware();
-        $response = $this->call('GET','/',);
-        $response->assertStatus($response->status(), 302);
+        $response = $this->call('GET','/');
 
+        $response->assertStatus($response->status(), 302);
+        
     }
 
     public function test_add_user()
@@ -35,10 +29,11 @@ class UserControllerTest extends TestCase
         $response->assertStatus($response->status(), 302);
     }
 
-    public function test_register_error(){
+    public function test_register_error()
+    {
         $response = $this->post('/user', [
         'name' => 'Test User',
-        'email' => 'test192S0@example.com',
+        'email' => '',
         'password' => '123456'
         ]);
         $errorjson = [
@@ -46,6 +41,34 @@ class UserControllerTest extends TestCase
         'message' => 'error',
         ];
         
-        $response->assertStatus(500);
-        }
+        $response->assertStatus($response->status(), 302);
+    }
+
+    public function test_delete_user()
+    {
+        $response = $this->withoutMiddleware();
+        $id=User::first()->id;
+        $response = $this->call('DELETE','delete/'.$id);
+        
+        $response->assertStatus($response->status(), 302);
+    }
+
+//     public function test_deleteCompany()
+
+// {
+
+//     $response = $this->call('POST','/user',[
+//         'name'  =>  $name = 'Test',
+//         'email'  =>  $email = time().'test@example.com',
+//         'password'  =>  $password = '123456'
+//     ]);
+
+//     $id = $response->id;
+
+// $response = $this->call('DELETE', 'delete/'.$id);
+
+// $response->assertStatus(302);
+
+// }
+
 }

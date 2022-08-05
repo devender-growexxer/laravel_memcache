@@ -5,8 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use \Cache;
-
+use Illuminate\Support\Facades\Cache;
 class UserController extends Controller
 {
     public function index()
@@ -15,12 +14,11 @@ class UserController extends Controller
             return User::orderBy('created_at', 'desc')->get();
           });
         
-        $stats = Cache::getMemcached()->getStats();
-
         return view('users', [
             'users' => $users,
-            'stats' => array_pop($stats)
+            'stats' => Cache::getMemcached()->getStats()
         ]);
+        
     }
 
     public function add_user(Request $request)
@@ -43,8 +41,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
     
-        $user->save();
-
+        $user->save(); 
         Cache::forget('all_users');
     
         return redirect('/');
@@ -60,3 +57,4 @@ class UserController extends Controller
         return redirect('/');
     }
 }
+
